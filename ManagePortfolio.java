@@ -33,14 +33,14 @@ public class ManagePortfolio {
 
     public void buyStock(String stockName) {
         stocks.put(stockName, stocks.get(stockName) + 1);
-        portfolioValue += 100;
+        portfolioValue += 1;
     }
 
     public void sellStock(String stockName) {
         int currentQuantity = stocks.get(stockName);
         if (currentQuantity > 0) {
             stocks.put(stockName, currentQuantity - 1);
-            portfolioValue -= 100;
+            portfolioValue -= 1;
         }
     }
 

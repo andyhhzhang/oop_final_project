@@ -14,7 +14,7 @@ public class StockPortfolioApp {
 
     private JFrame frame;
     private JLabel portfolioValueLabel;
-    private DecimalFormat df = new DecimalFormat("0.00");
+    private DecimalFormat df = new DecimalFormat("0");
 
     public StockPortfolioApp(Point location, ExpenseTracker expenseTracker, ManagePortfolio managePortfolio) {
         this.expenseTracker = expenseTracker;
@@ -26,7 +26,7 @@ public class StockPortfolioApp {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Portfolio Value Label
-        portfolioValueLabel = new JLabel(" Portfolio Value: $" + df.format(managePortfolio.getPortfolioValue()));
+        portfolioValueLabel = new JLabel(" # Stocks Owned: " + df.format(managePortfolio.getPortfolioValue()));
         portfolioValueLabel.setFont(new Font("Arial", Font.BOLD, 20));
         
         // Export Button
@@ -114,7 +114,7 @@ public class StockPortfolioApp {
     }
 
     private void updatePortfolioValue(double portfolioValue) {
-        portfolioValueLabel.setText(" Portfolio Value: $" + df.format(portfolioValue));
+        portfolioValueLabel.setText(" # Stocks Owned: " + df.format(portfolioValue));
     }
     
     private void exportToCSV() {
@@ -127,7 +127,7 @@ public class StockPortfolioApp {
             File fileToSave = fileChooser.getSelectedFile();
             try (FileWriter writer = new FileWriter(fileToSave)) {
                 // Write the total portfolio value
-                writer.append("Total Portfolio Value,$" + df.format(managePortfolio.getPortfolioValue()) + "\n");
+                writer.append("Total # of stocks owned" + df.format(managePortfolio.getPortfolioValue()) + "\n");
 
                 // Write the header for the stocks
                 writer.append("Stock Name,Quantity\n");
