@@ -6,6 +6,7 @@ import java.util.Map;
 public class ManagePortfolio {
     private final Map<String, Integer> stocks;
     private double portfolioValue = 0.0;
+    private Map<String, Integer> lastVisitedQuantities = new HashMap<>();
 
     public ManagePortfolio() {
         stocks = new HashMap<>();
@@ -25,6 +26,22 @@ public class ManagePortfolio {
         stocks.put("Uber", 0);
         stocks.put("Paypal", 0);
         stocks.put("Snowflake", 0);
+        
+        saveCurrentState();
+    }
+    
+    public void saveCurrentState() {
+    	lastVisitedQuantities = new HashMap<>(stocks);
+    }
+    
+    public Map<String, Integer> getChangedStocks() {
+    	Map<String, Integer> changes = new HashMap<>();
+    	for(String stock : stocks.keySet()) {
+    		int change = stocks.get(stock) - lastVisitedQuantities.getOrDefault(stock, 0);
+    		if(change != 0)
+    			changes.put(stock, change);
+    	}
+    	return changes;
     }
 
     public String[] getStockNames() {

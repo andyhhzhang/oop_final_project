@@ -33,9 +33,15 @@ public class MainApp {
 
         // View Stock Portfolio
         JButton stockPortfolioButton = new JButton("Stock Portfolio");
-        stockPortfolioButton.setBackground(new Color(40, 167, 69));
+        stockPortfolioButton.setBackground(new Color(30, 144, 255));
         stockPortfolioButton.setForeground(Color.WHITE);
         stockPortfolioButton.setFont(new Font("Arial", Font.PLAIN, 20));
+        
+        // Portfolio Analysis
+        JButton portfolioAnalysisButton = new JButton("Portfolio Analysis");
+        portfolioAnalysisButton.setBackground(new Color(70, 130, 180)); // Yet another shade of blue
+        portfolioAnalysisButton.setForeground(Color.WHITE);
+        portfolioAnalysisButton.setFont(new Font("Arial", Font.PLAIN, 20));
 
         // Event listener for Expense
         expenseTrackerButton.addActionListener((ActionEvent e) -> {
@@ -48,19 +54,25 @@ public class MainApp {
         	frame.setVisible(false);
         	new StockPortfolioApp(frame.getLocation(), expenseTracker, managePortfolio).setVisible(true);
         });
+        // Event listner for Portfolio Analysis
+        portfolioAnalysisButton.addActionListener(e -> {
+            frame.setVisible(false);
+            new PortfolioAnalysisApp(frame.getLocation(), expenseTracker, managePortfolio).setVisible(true);
+        });
 
+        // Button alignment
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.insets = new Insets(30, 0, 30, 0);
         frame.add(titleLabel, constraints);
-
         constraints.gridy = 1;
         constraints.insets = new Insets(0, 0, 10, 0);
         frame.add(expenseTrackerButton, constraints);
-
         constraints.gridy = 2;
         frame.add(stockPortfolioButton, constraints);
+        constraints.gridy = 3;
+        frame.add(portfolioAnalysisButton, constraints);
 
         frame.setVisible(true);
     }
